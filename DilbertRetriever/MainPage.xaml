@@ -10,10 +10,23 @@
 
     <ListView x:Name="dilbertStrips"
               HorizontalContentAlignment="Center">
+        <ListView.Resources>
+            <local:DateConverter x:Key="DateConverter"/>
+        </ListView.Resources>
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel HorizontalAlignment="Center" />
             </ItemsPanelTemplate>
         </ListView.ItemsPanel>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Date, Converter={StaticResource DateConverter}}"
+                               FontWeight="Bold" />
+                    <Image Source="{Binding Strip}" 
+                           MaxWidth="800" />
+                </StackPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
     </ListView>
 </Page>

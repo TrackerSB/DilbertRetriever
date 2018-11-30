@@ -18,8 +18,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Media.Imaging;
 
-// Die Elementvorlage "Leere Seite" wird unter https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x407 dokumentiert.
-
 namespace DilbertRetriever {
     /// <summary>
     /// This page lists all Dilbert strips to browse.
@@ -36,15 +34,34 @@ namespace DilbertRetriever {
             }
         }
 
-        private object GetDilbertStrip(DateTime date) {
+        private DilbertStrip GetDilbertStrip(DateTime date) {
             string stripPageUrl = "https://dilbert.com/strip/" + date.ToString("yyyy-MM-dd");
             HtmlDocument document = web.Load(stripPageUrl);
-            HtmlNode strip = document.DocumentNode.SelectSingleNode("//img[contains(@class,'img-comic')]");
-            string stripImageUrl = strip.GetAttributeValue("src", "src attribute not found");
-            return new Image {
-                Source = new BitmapImage(new Uri("https:" + stripImageUrl)),
-                MaxWidth = 800
+            HtmlNode stripImageNode = document.DocumentNode.SelectSingleNode("//img[contains(@class,'img-comic')]");
+            string stripImageUrl = stripImageNode.GetAttributeValue("src", "src attribute not found");
+            return new DilbertStrip() {
+                Date = date,
+                Strip = new BitmapImage(new Uri("https:" + stripImageUrl))
             };
         }
+    }
+
+    public sealed class DateConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            if(value is DateTime) {
+                return ((DateTime) value).ToString("d");
+            } else {
+                throw new ArgumentException("The passed value can not be converted.");
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
+        }
+    }
+
+    public sealed class DilbertStrip {
+        public DateTime Date { get; set; }
+        public BitmapImage Strip { get; set; }
     }
 }
