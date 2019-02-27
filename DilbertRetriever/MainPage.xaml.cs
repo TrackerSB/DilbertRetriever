@@ -28,8 +28,12 @@ namespace DilbertRetriever {
                 Debug.WriteLine("Request dilbert strip for " + date);
                 HtmlDocument document = web.Load(stripPageUrl);
                 HtmlNode stripImageNode = document.DocumentNode.SelectSingleNode("//img[contains(@class,'img-comic')]");
-                string stripImageUrl = stripImageNode.GetAttributeValue("src", "src attribute not found");
-                stripImage = new BitmapImage(new Uri("https:" + stripImageUrl));
+                if (stripImageNode == null) {
+                    stripImage = null;
+                } else {
+                    string stripImageUrl = stripImageNode.GetAttributeValue("src", "src attribute not found");
+                    stripImage = new BitmapImage(new Uri("https:" + stripImageUrl));
+                }
             } catch (HttpRequestException ex) {
                 // TODO Return Dilbert placeholder image
                 stripImage = null;
