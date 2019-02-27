@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="824bb957-8142-4b48-9d9e-4eaa225ee796" Publisher="CN=Stefan Huber" Version="1.0.4.0" />
+  <Identity Name="824bb957-8142-4b48-9d9e-4eaa225ee796" Publisher="CN=Stefan Huber" Version="1.0.10.0" />
   <mp:PhoneIdentity PhoneProductId="824bb957-8142-4b48-9d9e-4eaa225ee796" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>DilbertRetriever</DisplayName>
