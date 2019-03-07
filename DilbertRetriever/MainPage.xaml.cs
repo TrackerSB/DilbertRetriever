@@ -37,6 +37,9 @@ namespace DilbertRetriever {
             } catch (HttpRequestException ex) {
                 // TODO Return Dilbert placeholder image
                 stripImage = null;
+            } catch(AggregateException ex) {
+                // TODO Return Dilbert placeholder image
+                stripImage = null;
             }
 
 
